@@ -8,6 +8,9 @@ app.use((req, res, next) => {
   next();
 });
 
+const produtosRoutes = require('./routes/produtos');
+app.use('/api/v1/produtos', produtosRoutes);
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Erro interno' });
@@ -16,6 +19,3 @@ app.use((err, req, res, next) => {
 app.listen(3000, () => {
   console.log('Servidor rodando na porta 3000');
 });
-
-const produtosRoutes = require('./routes/produtos');
-app.use('/api/v1/produtos', produtosRoutes);
