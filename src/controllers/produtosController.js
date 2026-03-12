@@ -39,7 +39,25 @@ function criar(req, res) {
   return res.status(201).json(novoProduto);
 }
 
-function atualizar(req, res) {}
+function atualizar(req, res) {
+  const { id } = req.params;
+  const index = produtos.findIndex(p => p.id === Number(id));
+
+  if (index === -1) {
+    return res.status(404).json({ erro: "Produto não encontrado" });
+  }
+
+  const atualizado = {
+    ...req.body,
+    id: produtos[index].id,
+    criado_em: produtos[index].criado_em,
+    atualizado_em: new Date()
+  };
+
+  produtos[index] = atualizado;
+  return res.status(200).json(atualizado);
+}
+
 function remover(req, res) {}
 
 module.exports = { listar, buscar, criar, atualizar, remover };
