@@ -58,6 +58,16 @@ function atualizar(req, res) {
   return res.status(200).json(atualizado);
 }
 
-function remover(req, res) {}
+function remover(req, res) {
+  const { id } = req.params;
+  const index = produtos.findIndex(p => p.id === Number(id));
+
+  if (index === -1) {
+    return res.status(404).json({ erro: "Produto não encontrado" });
+  }
+
+  produtos.splice(index, 1);
+  return res.status(204).send();
+}
 
 module.exports = { listar, buscar, criar, atualizar, remover };
