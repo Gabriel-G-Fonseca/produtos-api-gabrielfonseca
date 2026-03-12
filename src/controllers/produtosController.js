@@ -18,3 +18,6 @@ module.exports = {
   atualizar,
   remover
 };
+function listar(req, res) {
+  return res.status(200).json(produtos);
+}
