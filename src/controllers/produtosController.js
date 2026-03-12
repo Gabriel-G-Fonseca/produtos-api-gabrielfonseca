@@ -16,7 +16,29 @@ function buscar(req, res) {
   return res.status(200).json(produto);
 }
 
-function criar(req, res) {}
+function criar(req, res) {
+  const { nome, descricao, preco, categoria, estoque } = req.body;
+
+  if (!nome || !preco) {
+    return res.status(400).json({ erro: "Campos obrigatórios ausentes" });
+  }
+
+  const novoProduto = {
+    id: nextId++,
+    nome,
+    descricao,
+    preco,
+    categoria,
+    estoque,
+    ativo: true,
+    criado_em: new Date(),
+    atualizado_em: new Date()
+  };
+
+  produtos.push(novoProduto);
+  return res.status(201).json(novoProduto);
+}
+
 function atualizar(req, res) {}
 function remover(req, res) {}
 
